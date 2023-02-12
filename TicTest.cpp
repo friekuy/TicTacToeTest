@@ -50,12 +50,37 @@ void drawBoard(const char square[]) {
         << "         |         |         \n";
 }
 
-// This function takes user input and draws the player mark on the corresponding square on the board.
+// This function takes valid user input and draws the player mark on the corresponding square on the board.
+// If the chosen square is already marked, the player must choose a different square.
 void mark(char square[], const char &player) {
     int choice{};
+    bool validIn{false};
 
     std::cout << "Player " << player << "'s turn\n" << "Choose a square to mark: ";
-    std::cin >> choice;
+
+    do {
+        if (!(std::cin >> choice)) {
+            std::cout << "That is not a valid numerical character. Please try again!\n"
+                << "Player " << player << "'s turn\n" << "Choose a square to mark: ";
+            std::cin.clear();
+            std::cin.ignore(INT_MAX, '\n');
+        }
+        else if (choice < 1 || choice > 9) {
+            std::cout << "This square does not exist. Please try again!\n"
+                << "Player " << player << "'s turn\n" << "Choose a square to mark: ";
+            std::cin.clear();
+            std::cin.ignore(INT_MAX, '\n');
+        }
+        else if (square[choice - 1] == 'X' || square[choice - 1] == 'O'){
+            std::cout << "This square is already marked. Please try again!\n"
+                << "Player " << player << "'s turn\n" << "Choose a square to mark: ";
+            std::cin.clear();
+            std::cin.ignore(INT_MAX, '\n');
+        }
+        else validIn = true;
+    } while (!validIn);
+
+    std::cin.ignore(INT_MAX, '\n');
 
     // Array index starts at 0 which corresponds to square 1, so subtract 1 to the player's choice.
     square[choice - 1] = player;
