@@ -60,18 +60,24 @@ void mark(char square[], const char &player) {
 
     do {
         if (!(std::cin >> choice)) {
+            system("cls");
+            drawBoard(square);
             std::cout << "That is not a valid numerical character. Please try again!\n"
                 << "Player " << player << "'s turn\n" << "Choose a square to mark: ";
             std::cin.clear();
             std::cin.ignore(INT_MAX, '\n');
         }
         else if (choice < 1 || choice > 9) {
+            system("cls");
+            drawBoard(square);
             std::cout << "This square does not exist. Please try again!\n"
                 << "Player " << player << "'s turn\n" << "Choose a square to mark: ";
             std::cin.clear();
             std::cin.ignore(INT_MAX, '\n');
         }
         else if (square[choice - 1] == 'X' || square[choice - 1] == 'O'){
+            system("cls");
+            drawBoard(square);
             std::cout << "This square is already marked. Please try again!\n"
                 << "Player " << player << "'s turn\n" << "Choose a square to mark: ";
             std::cin.clear();
