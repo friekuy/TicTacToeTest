@@ -33,6 +33,8 @@ int main()
     else
         std::cout << "Draw!\n";
 
+    std::cin.get();
+
     return 0;
 }
 
